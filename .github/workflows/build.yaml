@@ -35,4 +35,4 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
-        run: task bake
+        run: task bake:nocache
