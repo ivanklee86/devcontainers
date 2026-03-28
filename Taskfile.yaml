@@ -1,0 +1,9 @@
+version: '3'
+
+env: {}
+
+tasks:
+  bake:
+    desc: "Build all docker images using docker bake"
+    cmds:
+      - docker buildx bake --file docker-bake.hcl
