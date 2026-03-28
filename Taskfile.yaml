@@ -1,0 +1,19 @@
+version: '3'
+
+env: {}
+
+tasks:
+  bake:
+    desc: "Build all docker images using docker bake"
+    cmds:
+      - docker buildx bake --file docker-bake.hcl
+
+  bake:nocache:
+    desc: "Build all docker images using docker bake"
+    cmds:
+      - docker buildx bake --file docker-bake.hcl --set "base.cache-to="
+
+  bake:push:
+    desc: "Build and push all docker images using docker bake"
+    cmds:
+      - docker buildx bake --file docker-bake.hcl --push
