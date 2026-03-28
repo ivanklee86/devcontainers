@@ -1,4 +1,4 @@
-ARG GO_VERSION=1.25
+ARG GO_VERSION=1.26
 FROM golang:${GO_VERSION} as go
 
 FROM base
