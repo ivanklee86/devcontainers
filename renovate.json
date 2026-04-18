@@ -9,16 +9,20 @@
   "automergeType": "pr",
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
       "groupName": "all dependencies",
-      "groupSlug": "all"
+      "groupSlug": "all",
+      "matchPackageNames": [
+        "*"
+      ]
     }
   ],
   "customManagers": [
     {
       "description": "GitHub release download URLs in Dockerfiles",
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$"],
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
       "matchStrings": [
         "https://github\\.com/(?<depName>[^/]+/[^/]+)/releases/download/(?<currentValue>v[^/]+)/"
       ],
@@ -28,7 +32,9 @@
     {
       "description": "Taskfile install script version flag in Dockerfiles",
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$"],
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
       "matchStrings": [
         "taskfile\\.dev/install\\.sh.*-- -d (?<currentValue>v[^\\s\"']+)"
       ],
@@ -39,7 +45,9 @@
     {
       "description": "go install commands in Dockerfiles",
       "customType": "regex",
-      "fileMatch": ["(^|/)Dockerfile$"],
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
       "matchStrings": [
         "go install (?<depName>[^@]+)@(?<currentValue>v[^\\s]+)"
       ],
