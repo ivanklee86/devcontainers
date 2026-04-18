@@ -1,10 +1,6 @@
 {
 	"name": "fullstack",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": "..",
-		"args": {}
-	},
+	"image": "ghcr.io/ivanklee86/devcontainer/go:1.26",
 
 	// Configure tool-specific properties.
 	"customizations": {
