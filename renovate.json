@@ -2,5 +2,49 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "schedule": ["on saturday"],
+  "minimumReleaseAge": "5 days",
+  "automerge": true,
+  "automergeType": "pr",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "groupName": "all dependencies",
+      "groupSlug": "all"
+    }
+  ],
+  "customManagers": [
+    {
+      "description": "GitHub release download URLs in Dockerfiles",
+      "customType": "regex",
+      "fileMatch": ["(^|/)Dockerfile$"],
+      "matchStrings": [
+        "https://github\\.com/(?<depName>[^/]+/[^/]+)/releases/download/(?<currentValue>v[^/]+)/"
+      ],
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    },
+    {
+      "description": "Taskfile install script version flag in Dockerfiles",
+      "customType": "regex",
+      "fileMatch": ["(^|/)Dockerfile$"],
+      "matchStrings": [
+        "taskfile\\.dev/install\\.sh.*-- -d (?<currentValue>v[^\\s\"']+)"
+      ],
+      "depNameTemplate": "go-task/task",
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "semver"
+    },
+    {
+      "description": "go install commands in Dockerfiles",
+      "customType": "regex",
+      "fileMatch": ["(^|/)Dockerfile$"],
+      "matchStrings": [
+        "go install (?<depName>[^@]+)@(?<currentValue>v[^\\s]+)"
+      ],
+      "datasourceTemplate": "go",
+      "versioningTemplate": "semver"
+    }
   ]
 }
