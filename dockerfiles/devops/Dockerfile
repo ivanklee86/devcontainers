@@ -24,4 +24,4 @@ COPY --from=alpine/helm:4.1.4 /usr/bin/helm /usr/local/bin/helm
 COPY --from=grafana/tanka:v0.37.0 /usr/bin/tk /usr/local/bin/tk
 COPY --from=grafana/tanka:v0.37.0 /usr/bin/jsonnet /usr/local/bin/jsonnet
 COPY --from=grafana/tanka:v0.37.0 /usr/bin/jb /usr/local/bin/jb
-COPY --from=quay.io/derailed/k9s:v0.50.18 /bin/k9s /usr/local/bin/k9s
+COPY --from=quay.io/derailed/k9s:v0.50.4 /bin/k9s /usr/local/bin/k9s
