@@ -8,6 +8,11 @@ tasks:
     cmds:
       - docker buildx bake --file docker-bake.hcl
 
+  bake:devops:
+    desc: "Build only the devops docker image using docker bake"
+    cmds:
+      - docker buildx bake --file docker-bake.hcl devops
+
   bake:push:
     desc: "Build and push all docker images using docker bake"
     cmds:
