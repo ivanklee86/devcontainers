@@ -19,3 +19,6 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d v3.50.0
 # Install Claude Code CLI
 RUN curl -fsSL https://claude.ai/install.sh | bash
 ENV PATH="/home/vscode/.local/bin:${PATH}"
+
+# Install Gantry
+COPY --from=ghcr.io/ivanklee86/gantry:0.0.4 /usr/local/bin/gantry /usr/local/bin/gantry
