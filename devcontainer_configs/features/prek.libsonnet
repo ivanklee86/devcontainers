@@ -1,5 +1,5 @@
 {
   "postCreateCommand"+: {
-    "install-prek": "prk install && prek run",
+    "install-prek": "prek install && prek run",
   }
 }
