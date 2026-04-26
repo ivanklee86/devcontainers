@@ -22,3 +22,6 @@ ENV PATH="/home/vscode/.local/bin:${PATH}"
 
 # Install Gantry
 COPY --from=ghcr.io/ivanklee86/gantry:0.0.4 /usr/local/bin/gantry /usr/local/bin/gantry
+
+# Install 1Password CLI
+COPY --from=1password/op:2.34.0 /usr/local/bin/op /usr/local/bin/op

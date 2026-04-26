@@ -8,6 +8,16 @@ tasks:
     cmds:
       - docker buildx bake --file docker-bake.hcl
 
+  bake:base:
+    desc: "Build only the base docker image using docker bake"
+    cmds:
+      - docker buildx bake --file docker-bake.hcl base
+
+  bake:base:run:
+    desc: "Run the base docker image interactively"
+    cmds:
+      - docker run --rm -it base:latest
+
   bake:devops:
     desc: "Build only the devops docker image using docker bake"
     cmds:
