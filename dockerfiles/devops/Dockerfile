@@ -18,6 +18,13 @@ RUN JSONNET_URL="https://github.com/google/go-jsonnet/releases/download/${JSONNE
     dpkg -i "${JSONNET_URL##*/}" && \
     rm -f "${JSONNET_URL##*/}"
 
+ARG AWS_CLI_VERSION=2.34.37
+RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && \
+    curl -O -L "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip" && \
+    unzip "awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip" && \
+    ./aws/install && \
+    rm -rf aws "awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip"
+
 USER vscode
 
 # - Install Terraform tools
