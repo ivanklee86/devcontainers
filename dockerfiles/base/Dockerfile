@@ -10,7 +10,7 @@ WORKDIR /home/vscode
 USER vscode
 
 # Install prek
-RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.3.9/prek-installer.sh | sh
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.3.11/prek-installer.sh | sh
 
 # Install taskfile
 ENV TASK_X_REMOTE_TASKFILES=1
