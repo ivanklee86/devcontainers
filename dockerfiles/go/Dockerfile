@@ -15,4 +15,4 @@ ENV PATH=/usr/local/go/bin:$GOPATH/bin:/home/vscode/.local/bin:$PATH
 COPY --from=golangci/golangci-lint:v2.11.4 /usr/bin/golangci-lint /usr/local/bin
 RUN go install github.com/jstemmer/go-junit-report/v2@v2.1.0
 COPY --from=gomplate/gomplate:v5.0.0 /gomplate /usr/local/bin/gomplate
-COPY --from=goreleaser/goreleaser:v2.15.3 /usr/bin/goreleaser /usr/local/bin
+COPY --from=goreleaser/goreleaser:v2.15.4 /usr/bin/goreleaser /usr/local/bin
