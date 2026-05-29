@@ -8,20 +8,27 @@ tasks:
     cmds:
       - docker buildx bake --file docker-bake.hcl
 
-  bake:base:
-    desc: "Build only the base docker image using docker bake"
+  bake:build:*:
+    desc: "Build a single bake target for the local platform and load it (e.g. task bake:build:base)"
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+      PLATFORM:
+        sh: uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/'
     cmds:
-      - docker buildx bake --file docker-bake.hcl base
+      - |
+        docker buildx bake --file docker-bake.hcl {{.TARGET}} --print \
+          | jq --arg p "linux/{{.PLATFORM}}" \
+            '{target: (.target | map_values({"platforms": [$p], "cache-from": [], "cache-to": []}))}' \
+          | docker buildx bake --file docker-bake.hcl --file - {{.TARGET}} --load
 
-  bake:base:run:
-    desc: "Run the base docker image interactively"
+  bake:run:*:
+    desc: "Run a single bake target's image interactively (e.g. task bake:run:devops)"
+    vars:
+      TARGET: '{{index .MATCH 0}}'
+      IMAGE:
+        sh: docker buildx bake --file docker-bake.hcl {{.TARGET}} --print | jq -r '.target."{{.TARGET}}".tags[0]'
     cmds:
-      - docker run --rm -it base:latest
-
-  bake:devops:
-    desc: "Build only the devops docker image using docker bake"
-    cmds:
-      - docker buildx bake --file docker-bake.hcl devops
+      - docker run --rm -it {{.IMAGE}}
 
   bake:push:
     desc: "Build and push all docker images using docker bake"

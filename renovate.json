@@ -53,6 +53,16 @@
       ],
       "datasourceTemplate": "go",
       "versioningTemplate": "semver"
+    },
+    {
+      "description": "Pinned ARG versions with renovate annotations in Dockerfiles",
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/(^|/)Dockerfile$/"
+      ],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( extractVersion=(?<extractVersion>\\S+))?\\s+ARG \\w+=(?<currentValue>\\S+)"
+      ]
     }
   ]
 }
