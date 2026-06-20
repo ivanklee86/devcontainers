@@ -24,7 +24,7 @@ ENV PATH="/home/vscode/.local/bin:${PATH}"
 COPY --from=ghcr.io/ivanklee86/gantry:0.0.4 /usr/local/bin/gantry /usr/local/bin/gantry
 
 # Install 1Password CLI
-COPY --from=1password/op:2.34.0 /usr/local/bin/op /usr/local/bin/op
+COPY --from=1password/op:2.34.1 /usr/local/bin/op /usr/local/bin/op
 
 # Install bun
 # renovate: datasource=github-releases depName=oven-sh/bun extractVersion=^bun-v(?<version>.+)$
@@ -35,5 +35,5 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install opencode
 # renovate: datasource=npm depName=opencode-ai
-ARG OPENCODE_VERSION=1.16.2
+ARG OPENCODE_VERSION=1.17.7
 RUN bun install -g opencode-ai@${OPENCODE_VERSION}
