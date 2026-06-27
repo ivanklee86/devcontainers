@@ -33,7 +33,7 @@ COPY --from=ghcr.io/terraform-linters/tflint:v0.61.0 /usr/local/bin/tflint /usr/
 
 # - Install Kubernetes tools
 COPY --from=registry.k8s.io/kubectl:v1.35.0 /bin/kubectl /usr/local/bin/kubectl
-COPY --from=alpine/helm:4.2.1 /usr/bin/helm /usr/local/bin/helm
-COPY --from=grafana/tanka:0.37.2 /usr/local/bin/tk /usr/local/bin/tk
-COPY --from=grafana/tanka:0.37.2 /usr/local/bin/jb /usr/local/bin/jb
+COPY --from=alpine/helm:4.2.2 /usr/bin/helm /usr/local/bin/helm
+COPY --from=grafana/tanka:0.37.3 /usr/local/bin/tk /usr/local/bin/tk
+COPY --from=grafana/tanka:0.37.3 /usr/local/bin/jb /usr/local/bin/jb
 COPY --from=quay.io/derailed/k9s:v0.50.4 /bin/k9s /usr/local/bin/k9s
