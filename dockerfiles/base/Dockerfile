@@ -10,11 +10,11 @@ WORKDIR /home/vscode
 USER vscode
 
 # Install prek
-RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.4.5/prek-installer.sh | sh
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.4.8/prek-installer.sh | sh
 
 # Install taskfile
 ENV TASK_X_REMOTE_TASKFILES=1
-RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d v3.51.1
+RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d v3.52.0
 
 # Install Claude Code CLI
 RUN curl -fsSL https://claude.ai/install.sh | bash
@@ -35,5 +35,5 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install opencode
 # renovate: datasource=npm depName=opencode-ai
-ARG OPENCODE_VERSION=1.17.11
+ARG OPENCODE_VERSION=1.17.13
 RUN bun install -g opencode-ai@${OPENCODE_VERSION}
