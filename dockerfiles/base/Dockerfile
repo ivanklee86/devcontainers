@@ -35,5 +35,5 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install opencode
 # renovate: datasource=npm depName=opencode-ai
-ARG OPENCODE_VERSION=1.18.11
+ARG OPENCODE_VERSION=1.18.15
 RUN bun install -g opencode-ai@${OPENCODE_VERSION}
