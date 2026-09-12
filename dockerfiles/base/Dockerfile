@@ -10,7 +10,7 @@ WORKDIR /home/vscode
 USER vscode
 
 # Install prek
-RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.5.0/prek-installer.sh | sh
+RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/j178/prek/releases/download/v0.5.2/prek-installer.sh | sh
 
 # Install taskfile
 ENV TASK_X_REMOTE_TASKFILES=1
@@ -28,12 +28,12 @@ COPY --from=1password/op:2.39.0 /usr/local/bin/op /usr/local/bin/op
 
 # Install bun
 # renovate: datasource=github-releases depName=oven-sh/bun extractVersion=^bun-v(?<version>.+)$
-ARG BUN_VERSION=1.4.0
+ARG BUN_VERSION=1.4.2
 ENV BUN_INSTALL="/home/vscode/.bun"
 ENV PATH="/home/vscode/.bun/bin:${PATH}"
 RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install opencode
 # renovate: datasource=npm depName=opencode-ai
-ARG OPENCODE_VERSION=1.18.25
+ARG OPENCODE_VERSION=1.18.29
 RUN bun install -g opencode-ai@${OPENCODE_VERSION}
