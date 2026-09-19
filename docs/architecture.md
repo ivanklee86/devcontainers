@@ -20,6 +20,7 @@ All images inherit these from `dockerfiles/base/Dockerfile`:
 - [prek](https://github.com/j178/prek)
 - [Taskfile](https://taskfile.dev/) (`task`)
 - [Claude Code CLI](https://claude.com/claude-code)
+- [CodeRabbit CLI](https://www.coderabbit.ai/cli)
 - [Gantry](https://github.com/ivanklee86/gantry)
 - [1Password CLI](https://developer.1password.com/docs/cli/) (`op`)
 - [bun](https://bun.sh/)

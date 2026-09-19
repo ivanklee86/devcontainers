@@ -12,7 +12,7 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "WebFetch(domain:registry.k8s.io)",
       "WebFetch(domain:ghcr.io)",
-      "WebFetch(domain:us-east4-docker.pkg.dev)",
+      "WebFetch(domain:us-east4-docker.pkg.dev)"
     ]
   }
 }
