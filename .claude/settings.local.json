@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:proxy.golang.org)",
+      "Bash(task bake *)",
+      "WebSearch",
+      "Bash(gh api *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:quay.io)",
+      "WebFetch(domain:hub.docker.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:registry.k8s.io)",
+      "WebFetch(domain:ghcr.io)",
+      "WebFetch(domain:us-east4-docker.pkg.dev)",
+    ]
+  }
+}
