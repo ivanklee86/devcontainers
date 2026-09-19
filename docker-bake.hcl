@@ -4,6 +4,7 @@ group "default" {
         "python",
         "go_125",
         "go_126",
+        "go_127",
         "devops"
     ]
 }
@@ -71,6 +72,23 @@ target "go_126" {
     ]
     cache-from = ["type=registry,ref=${DOCKER_REPO_URL}/go:1.26-cache"]
     cache-to = ["type=registry,ref=${DOCKER_REPO_URL}/go:1.26-cache,mode=max"]
+}
+
+target "go_127" {
+    contexts = {
+        base = "target:base"
+    }
+    args = {
+        GO_VERSION = "1.27"
+    }
+    context = "dockerfiles/go"
+    dockerfile = "Dockerfile"
+    platforms = ["linux/amd64", "linux/arm64"]
+    tags = [
+        "${DOCKER_REPO_URL}/go:1.27",
+    ]
+    cache-from = ["type=registry,ref=${DOCKER_REPO_URL}/go:1.27-cache"]
+    cache-to = ["type=registry,ref=${DOCKER_REPO_URL}/go:1.27-cache,mode=max"]
 }
 
 target "devops" {

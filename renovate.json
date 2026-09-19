@@ -3,17 +3,26 @@
   "extends": [
     "config:recommended"
   ],
-  "schedule": ["on saturday"],
   "minimumReleaseAge": "5 days",
+  "minimumReleaseAgeBehaviour": "timestamp-optional",
   "automerge": true,
   "automergeType": "pr",
+  "platformAutomerge": true,
   "packageRules": [
     {
-      "groupName": "all dependencies",
-      "groupSlug": "all",
-      "matchPackageNames": [
-        "*"
-      ]
+      "groupName": "docker base images",
+      "groupSlug": "docker-base-images",
+      "matchManagers": ["dockerfile", "devcontainer"]
+    },
+    {
+      "groupName": "github actions",
+      "groupSlug": "github-actions",
+      "matchManagers": ["github-actions"]
+    },
+    {
+      "groupName": "pinned tool versions",
+      "groupSlug": "pinned-tool-versions",
+      "matchManagers": ["regex"]
     }
   ],
   "customManagers": [

@@ -1,6 +1,9 @@
 {
 	"name": "devcontainer",
-	"image": "ghcr.io/ivanklee86/devcontainer/base:main",
+	"build": {
+		"dockerfile": "../dockerfiles/base/Dockerfile",
+		"context": "../dockerfiles/base"
+	},
 
 	// Configure tool-specific properties.
 	"customizations": {
