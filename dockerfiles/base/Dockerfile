@@ -36,11 +36,6 @@ ARG CLAUDE_CODE_VERSION=2.1.278
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
-# Install CodeRabbit CLI
-# No renovate datasource is available for this dependency; bump CODERABBIT_VERSION manually.
-ARG CODERABBIT_VERSION=0.7.8
-RUN CODERABBIT_VERSION="${CODERABBIT_VERSION}" curl -fsSL https://cli.coderabbit.ai/install.sh | sh
-
 # Install Gantry
 COPY --from=ghcr.io/ivanklee86/gantry:0.0.4 /usr/local/bin/gantry /usr/local/bin/gantry
 
