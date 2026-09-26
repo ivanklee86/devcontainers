@@ -51,7 +51,7 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install ccusage
 # renovate: datasource=npm depName=ccusage
-ARG CCUSAGE_VERSION=20.0.23
+ARG CCUSAGE_VERSION=20.0.24
 RUN bun install -g ccusage@${CCUSAGE_VERSION}
 
 # Enable the ccusage statusline by default
