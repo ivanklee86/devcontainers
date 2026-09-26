@@ -1,6 +1,6 @@
 {
 	"name": "devcontainer",
-	"image": "ghcr.io/ivanklee86/devcontainer/python:main",
+	"image": "ghcr.io/ivanklee86/devcontainer/python:3.14",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -19,6 +19,7 @@
 				"yaml.schemas": {
 					"https://taskfile.dev/schema.json": [
 						"**/Taskfile.yml",
+						"**/Taskfile.yaml",
 						"tasks/**"
 					]
 				}
@@ -26,15 +27,18 @@
 
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
+				"anthropic.claude-code",
 				"astral-sh.ty",
 				"charliermarsh.ruff",
+				"github.vscode-github-actions",
+				"GitHub.copilot",
 				"ms-python.python",
 				"ms-python.debugpy",
 				"ms-python.vscode-pylance",
-                "ms-azuretools.vscode-docker",
+				"ms-azuretools.vscode-docker",
 				"redhat.vscode-yaml",
 				"tamasfe.even-better-toml",
-                "task.vscode-task"
+				"task.vscode-task"
 			]
 		}
 	},
@@ -45,15 +49,21 @@
 	"mounts": [
 		// Mount the .gitconfig into the container to preserve git settings like email and username.
 		"source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
-    ],
+		// Mount the host ~/.claude directory to share Claude Code settings, memory, and history.
+		// The host directory must exist, and it hides the image's baked ~/.claude/settings.json.
+		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+		// Mount known_hosts read-only to avoid TOFU prompts that block non-interactive git operations.
+		// Contains only public host key fingerprints — no secrets. Private keys use the forwarded agent.
+		"source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached,readonly"
+	],
 
-    // Use 'postCreateCommand' to run commands after the container is created.
+	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": {
-		"install-prek": "prek install && prek run",
+		"install-prek": "prek install && prek run"
 	},
 
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+		"ghcr.io/devcontainers/features/docker-in-docker:4": {
 			"moby": false
 		}
 	},
