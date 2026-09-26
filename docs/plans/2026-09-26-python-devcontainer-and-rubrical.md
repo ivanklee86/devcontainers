@@ -56,7 +56,7 @@ the image pushed, before Phase 2 is regenerated.
 ### 1b. Fixes that apply to all bases
 
 - **Taskfile schema glob:** change `**/Taskfile.yml` to `**/Taskfile.{yml,yaml}`. Every repo uses `Taskfile.yaml`, so the schema is never applied right now.
-- **`github.vscode-github-actions`:** move it into the bases. tangle, tangle-deployments and rubrical all add it, so the three libsonnets can then drop it.
+- **`github.vscode-github-actions`:** move it into the bases. tangle, tangle-deployments and rubrical all add it, so the three libsonnets can then drop it. They **must** drop it: gantry concatenates extension lists without deduplicating, so keeping it gives a duplicate entry.
 
 ### 1c. Stop the bases from drifting behind Renovate (root cause)
 
@@ -119,8 +119,9 @@ the rule that the generated file must not be edited by hand.
 - The CI `build` job passes and pushes both `python:main` and `python:3.14`. Also make sure
   `ghcr.io/ivanklee86/devcontainer/python:3.14` pulls without logging in, because the package is public.
 - Regenerate tangle's `devcontainer.json` in a scratch checkout. The only differences should be the
-  intended ones: the schema glob and the GitHub Actions extension, which is deduplicated if the
-  libsonnet still lists it.
+  intended ones: the schema glob, the GitHub Actions extension and the `~/.claude` and `known_hosts`
+  mounts. ✅ Done 2026-09-26 against the local branch. The extension appears twice until tangle's
+  libsonnet drops it.
 
 ---
 
@@ -222,4 +223,4 @@ the rule that the generated file must not be edited by hand.
 1. PR in `devcontainers`: Phase 1. Merge it and wait for the image push.
 2. PR in `rubrical`: Phase 2a–2e. Rebuild and verify.
 3. Turn off pre-commit.ci for rubrical.
-4. Follow-up: regenerate tangle and tangle-deployments to pick up 1b/1c. Delete the rubrical scratchpad.
+4. Follow-up: in tangle and tangle-deployments, remove `github.vscode-github-actions` from the libsonnet, then regenerate to pick up 1b/1c and the new mounts. Delete the rubrical scratchpad.
