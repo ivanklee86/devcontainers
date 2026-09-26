@@ -11,6 +11,7 @@
 				"yaml.schemas": {
 					"https://taskfile.dev/schema.json": [
 						"**/Taskfile.yml",
+						"**/Taskfile.yaml",
 						"tasks/**"
 					]
 				}
@@ -18,10 +19,11 @@
 
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-                "anthropic.claude-code",
+				"anthropic.claude-code",
+				"github.vscode-github-actions",
 				"GitHub.copilot",
 				"hashicorp.hcl",
-                "ms-azuretools.vscode-docker",
+				"ms-azuretools.vscode-docker",
 				"redhat.vscode-yaml",
 				"tamasfe.even-better-toml",
 				"task.vscode-task"
@@ -34,14 +36,14 @@
 	},
 
 	"features": {
-		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+		"ghcr.io/devcontainers/features/docker-in-docker:4": {
 			"moby": false
 		}
 	},
 
 	"mounts": [
 		// Mount the .gitconfig into the container to preserve git settings like email and username.
-    	"source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
 		// Mount the .aws folder into the container to allow use of the AWS CLI.
 		"source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached",
 		// Mount the .kube folder into the container to allow use of kubectl.
@@ -50,7 +52,7 @@
 		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
 		// Mount known_hosts read-only to avoid TOFU prompts that block non-interactive git operations.
 		// Contains only public host key fingerprints — no secrets. Private keys use the forwarded agent.
-		"source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached,readonly",
+		"source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached,readonly"
 	],
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.

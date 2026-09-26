@@ -49,3 +49,36 @@ All images inherit these from `dockerfiles/base/Dockerfile`:
 - [helm](https://helm.sh/)
 - [tanka](https://tanka.dev/) (`tk`, `jb`)
 - [k9s](https://k9scli.io/)
+
+## Consuming a base (`devcontainer_configs/`)
+
+Repos don't hand-write `devcontainer.json`. They generate it with [Gantry](https://github.com/ivanklee86/gantry) from a base config in `devcontainer_configs/bases/<lang>` and optional `devcontainer_configs/features/*.libsonnet`, plus a repo-specific libsonnet overlay:
+
+```
+.devcontainer/
+  gantry.yaml             # overlays: base + features, then <repo>.libsonnet
+  <repo>.libsonnet        # name, extra extensions, post-install hook
+  devcontainer.json       # GENERATED: gantry build --config gantry.yaml --write
+  devcontainer-lock.json
+  post_install.sh         # repo setup + git config
+  Dockerfile              # only if the repo needs extra tools; add features/local_build.libsonnet
+```
+
+| Base | Image |
+|---|---|
+| `python` | `ghcr.io/ivanklee86/devcontainer/python:3.14` |
+| `go` | `ghcr.io/ivanklee86/devcontainer/go:1.26` |
+| `terraform` | `ghcr.io/ivanklee86/devcontainer/devops:main` |
+
+| Feature | Effect |
+|---|---|
+| `prek.libsonnet` | Runs `prek install && prek run` after create. |
+| `local_build.libsonnet` | Swaps `image` for a build of `.devcontainer/Dockerfile`. |
+| `precommit.libsonnet` | Legacy: installs pre-commit with uv. Prefer `prek.libsonnet`. |
+
+Rules:
+
+- Never edit the generated `devcontainer.json` by hand. Change the libsonnet overlay (or the base here) and regenerate.
+- `postCreateCommand` entries run in parallel, so don't rely on order between them.
+- Every base bind-mounts `~/.gitconfig`, `~/.claude` and `~/.ssh/known_hosts` from the host. **These paths have to exist on the host** or the container won't start. The `~/.claude` mount hides the image's baked `~/.claude/settings.json` (the ccusage statusline); copy its `statusLine` block into the host's settings if you want it.
+- Renovate updates the base configs here through the `devcontainer` manager (see `renovate.json`).

@@ -35,6 +35,7 @@ target "python" {
     platforms = ["linux/amd64", "linux/arm64"]
     tags = [
         "${DOCKER_REPO_URL}/python:main",
+        "${DOCKER_REPO_URL}/python:3.14",
     ]
     cache-from = ["type=registry,ref=${DOCKER_REPO_URL}/python:cache"]
     cache-to = ["type=registry,ref=${DOCKER_REPO_URL}/python:cache,mode=max"]

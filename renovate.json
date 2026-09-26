@@ -8,6 +8,13 @@
   "automerge": true,
   "automergeType": "pr",
   "platformAutomerge": true,
+  "devcontainer": {
+    "managerFilePatterns": [
+      "/(^|/)\\.devcontainer/devcontainer\\.json$/",
+      "/(^|/)\\.devcontainer\\.json$/",
+      "/^devcontainer_configs/bases/[^/]+/devcontainer\\.json$/"
+    ]
+  },
   "packageRules": [
     {
       "groupName": "docker base images",
