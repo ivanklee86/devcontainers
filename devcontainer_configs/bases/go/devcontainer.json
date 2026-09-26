@@ -1,6 +1,6 @@
 {
 	"name": "fullstack",
-	"image": "ghcr.io/ivanklee86/devcontainer/go:1.26",
+	"image": "ghcr.io/ivanklee86/devcontainer/go:1.27",
 
 	// Configure tool-specific properties.
 	"customizations": {
