@@ -26,13 +26,13 @@ RUN curl --proto '=https' --tlsv1.2 -LsSf \
 
 # Install taskfile
 # renovate: datasource=github-releases depName=go-task/task
-ARG TASK_VERSION=v3.53.1
+ARG TASK_VERSION=v3.54.0
 ENV TASK_X_REMOTE_TASKFILES=1
 RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d "${TASK_VERSION}"
 
 # Install Claude Code CLI
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.286
+ARG CLAUDE_CODE_VERSION=2.1.287
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
