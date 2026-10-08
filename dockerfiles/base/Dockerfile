@@ -40,7 +40,7 @@ ENV PATH="/home/vscode/.local/bin:${PATH}"
 COPY --from=ghcr.io/ivanklee86/gantry:0.0.4 /usr/local/bin/gantry /usr/local/bin/gantry
 
 # Install 1Password CLI
-COPY --from=1password/op:2.39.0 /usr/local/bin/op /usr/local/bin/op
+COPY --from=1password/op:2.40.0 /usr/local/bin/op /usr/local/bin/op
 
 # Install bun
 # renovate: datasource=github-releases depName=oven-sh/bun extractVersion=^bun-v(?<version>.+)$
