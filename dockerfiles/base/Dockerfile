@@ -32,7 +32,7 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d "${TASK_VER
 
 # Install Claude Code CLI
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.288
+ARG CLAUDE_CODE_VERSION=2.1.289
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
