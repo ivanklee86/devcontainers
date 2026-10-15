@@ -44,14 +44,14 @@ COPY --from=1password/op:2.40.0 /usr/local/bin/op /usr/local/bin/op
 
 # Install bun
 # renovate: datasource=github-releases depName=oven-sh/bun extractVersion=^bun-v(?<version>.+)$
-ARG BUN_VERSION=1.4.2
+ARG BUN_VERSION=1.4.3
 ENV BUN_INSTALL="/home/vscode/.bun"
 ENV PATH="/home/vscode/.bun/bin:${PATH}"
 RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install ccusage
 # renovate: datasource=npm depName=ccusage
-ARG CCUSAGE_VERSION=20.0.26
+ARG CCUSAGE_VERSION=20.0.28
 RUN bun install -g ccusage@${CCUSAGE_VERSION}
 
 # Enable the ccusage statusline by default
