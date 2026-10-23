@@ -32,7 +32,7 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d "${TASK_VER
 
 # Install Claude Code CLI
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.302
+ARG CLAUDE_CODE_VERSION=2.1.303
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
@@ -51,7 +51,7 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install ccusage
 # renovate: datasource=npm depName=ccusage
-ARG CCUSAGE_VERSION=20.0.35
+ARG CCUSAGE_VERSION=20.0.36
 RUN bun install -g ccusage@${CCUSAGE_VERSION}
 
 # Enable the ccusage statusline by default
