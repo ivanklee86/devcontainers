@@ -29,7 +29,7 @@ USER vscode
 
 # - Install Terraform tools
 COPY --from=quay.io/terraform-docs/terraform-docs:0.20.0 /usr/local/bin/terraform-docs /usr/local/bin
-COPY --from=ghcr.io/terraform-linters/tflint:v0.64.0 /usr/local/bin/tflint /usr/local/bin
+COPY --from=ghcr.io/terraform-linters/tflint:v0.65.0 /usr/local/bin/tflint /usr/local/bin
 
 # - Install Kubernetes tools
 COPY --from=registry.k8s.io/kubectl:v1.37.1 /bin/kubectl /usr/local/bin/kubectl
