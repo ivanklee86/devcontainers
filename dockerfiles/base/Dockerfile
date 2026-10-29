@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y build-essential binutils-gold git-lfs -
 # Install GitHub CLI
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.103.0
+ARG GH_VERSION=v2.103.2
 RUN GH_DIR="gh_${GH_VERSION#v}_linux_${TARGETARCH}" && \
     curl -fsSL "https://github.com/cli/cli/releases/download/${GH_VERSION}/${GH_DIR}.tar.gz" \
     | tar -xz -C /usr/local/bin --strip-components=2 --wildcards '*/bin/gh'
@@ -32,7 +32,7 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d "${TASK_VER
 
 # Install Claude Code CLI
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.309
+ARG CLAUDE_CODE_VERSION=2.1.310
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
@@ -51,7 +51,7 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 
 # Install ccusage
 # renovate: datasource=npm depName=ccusage
-ARG CCUSAGE_VERSION=20.0.41
+ARG CCUSAGE_VERSION=20.0.42
 RUN bun install -g ccusage@${CCUSAGE_VERSION}
 
 # Enable the ccusage statusline by default
