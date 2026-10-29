@@ -25,7 +25,22 @@ RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && 
     ./aws/install && \
     rm -rf aws "awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip"
 
+# - Install jq (pinned; shadows the base image's apt jq)
+# renovate: datasource=github-releases depName=jqlang/jq extractVersion=^jq-(?<version>.+)$
+ARG JQ_VERSION=1.8.2
+RUN curl -fsSL -o /usr/local/bin/jq \
+    "https://github.com/jqlang/jq/releases/download/jq-${JQ_VERSION}/jq-linux-${TARGETARCH}" && \
+    chmod +x /usr/local/bin/jq
+
 USER vscode
+
+# - Expose the python base image's uv-managed Python as `python` and `python3`
+# Keep in sync with PYTHON_VERSION in dockerfiles/python/Dockerfile.
+ARG PYTHON_VERSION=3.14
+RUN uv python install --default ${PYTHON_VERSION}
+
+# - Install yq
+COPY --from=mikefarah/yq:4.54.1 /usr/bin/yq /usr/local/bin/yq
 
 # - Install Terraform tools
 COPY --from=quay.io/terraform-docs/terraform-docs:0.20.0 /usr/local/bin/terraform-docs /usr/local/bin

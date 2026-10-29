@@ -49,6 +49,9 @@ All images inherit these from `dockerfiles/base/Dockerfile`:
 - [helm](https://helm.sh/)
 - [tanka](https://tanka.dev/) (`tk`, `jb`)
 - [k9s](https://k9scli.io/)
+- [jq](https://jqlang.org/)
+- [yq](https://github.com/mikefarah/yq)
+- [Python](https://www.python.org/) 3.14 via uv, inherited from `python` and exposed as `python` / `python3`
 
 ## Consuming a base (`devcontainer_configs/`)
 
