@@ -27,6 +27,14 @@ RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && 
 
 USER vscode
 
+# - Install Python with uv, exposed as `python` and `python3`
+# Keep in sync with PYTHON_VERSION in dockerfiles/python/Dockerfile.
+ARG PYTHON_VERSION=3.14
+RUN uv python install --default ${PYTHON_VERSION}
+
+# - Install yq
+COPY --from=mikefarah/yq:4.54.1 /usr/bin/yq /usr/local/bin/yq
+
 # - Install Terraform tools
 COPY --from=quay.io/terraform-docs/terraform-docs:0.20.0 /usr/local/bin/terraform-docs /usr/local/bin
 COPY --from=ghcr.io/terraform-linters/tflint:v0.65.0 /usr/local/bin/tflint /usr/local/bin
