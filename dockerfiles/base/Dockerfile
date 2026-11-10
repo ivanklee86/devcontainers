@@ -20,7 +20,7 @@ USER vscode
 
 # Install prek
 # renovate: datasource=github-releases depName=j178/prek
-ARG PREK_VERSION=v0.5.9
+ARG PREK_VERSION=v0.5.10
 RUN curl --proto '=https' --tlsv1.2 -LsSf \
     "https://github.com/j178/prek/releases/download/${PREK_VERSION}/prek-installer.sh" | sh
 
@@ -32,7 +32,7 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d "${TASK_VER
 
 # Install Claude Code CLI
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.317
+ARG CLAUDE_CODE_VERSION=2.1.318
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
