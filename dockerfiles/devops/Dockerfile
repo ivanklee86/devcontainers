@@ -28,7 +28,7 @@ RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && 
 USER vscode
 
 # - Install Terraform tools
-COPY --from=quay.io/terraform-docs/terraform-docs:0.20.0 /usr/local/bin/terraform-docs /usr/local/bin
+COPY --from=quay.io/terraform-docs/terraform-docs:0.25.1 /usr/local/bin/terraform-docs /usr/local/bin
 COPY --from=ghcr.io/terraform-linters/tflint:v0.66.0 /usr/local/bin/tflint /usr/local/bin
 
 # - Install Kubernetes tools
