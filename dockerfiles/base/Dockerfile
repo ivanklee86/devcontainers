@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y build-essential binutils-gold git-lfs -
 # Install GitHub CLI
 ARG TARGETARCH
 # renovate: datasource=github-releases depName=cli/cli
-ARG GH_VERSION=v2.104.0
+ARG GH_VERSION=v2.105.0
 RUN GH_DIR="gh_${GH_VERSION#v}_linux_${TARGETARCH}" && \
     curl -fsSL "https://github.com/cli/cli/releases/download/${GH_VERSION}/${GH_DIR}.tar.gz" \
     | tar -xz -C /usr/local/bin --strip-components=2 --wildcards '*/bin/gh'
@@ -32,7 +32,7 @@ RUN sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d "${TASK_VER
 
 # Install Claude Code CLI
 # renovate: datasource=npm depName=@anthropic-ai/claude-code
-ARG CLAUDE_CODE_VERSION=2.1.326
+ARG CLAUDE_CODE_VERSION=2.1.327
 RUN curl -fsSL https://claude.ai/install.sh | bash -s "${CLAUDE_CODE_VERSION}"
 ENV PATH="/home/vscode/.local/bin:${PATH}"
 
