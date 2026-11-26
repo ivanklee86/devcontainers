@@ -29,7 +29,7 @@
     {
       "groupName": "pinned tool versions",
       "groupSlug": "pinned-tool-versions",
-      "matchManagers": ["regex"]
+      "matchManagers": ["custom.regex"]
     }
   ],
   "customManagers": [
