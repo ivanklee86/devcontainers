@@ -29,7 +29,7 @@ RUN K9S_URL="https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9
     rm -f "${K9S_URL##*/}"
 
 # renovate: datasource=github-tags depName=aws/aws-cli
-ARG AWS_CLI_VERSION=2.42.1
+ARG AWS_CLI_VERSION=2.42.4
 RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && \
     curl -O -L "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip" && \
     unzip "awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip" && \
