@@ -7,7 +7,7 @@ ENV TENV_AUTO_INSTALL=true
 ARG TARGETARCH
 USER root
 # renovate: datasource=github-releases depName=tofuutils/tenv
-ARG TENV_VERSION=v4.10.1
+ARG TENV_VERSION=v4.16.9
 RUN TENV_URL="https://github.com/tofuutils/tenv/releases/download/${TENV_VERSION}/tenv_${TENV_VERSION}_${TARGETARCH}.deb" && \
     curl -O -L "$TENV_URL" && \
     dpkg -i "${TENV_URL##*/}" && \
@@ -37,7 +37,7 @@ RUN SOFKA_URL="https://github.com/nklmilojevic/sofka/releases/download/${SOFKA_V
     rm -f "${SOFKA_URL##*/}"
 
 # renovate: datasource=github-tags depName=aws/aws-cli
-ARG AWS_CLI_VERSION=2.34.37
+ARG AWS_CLI_VERSION=2.42.4
 RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && \
     curl -O -L "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip" && \
     unzip "awscli-exe-linux-${ARCH}-${AWS_CLI_VERSION}.zip" && \
