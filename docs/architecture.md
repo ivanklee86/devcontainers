@@ -80,5 +80,5 @@ Rules:
 
 - Never edit the generated `devcontainer.json` by hand. Change the libsonnet overlay (or the base here) and regenerate.
 - `postCreateCommand` entries run in parallel, so don't rely on order between them.
-- Every base bind-mounts `~/.gitconfig`, `~/.claude` and `~/.ssh/known_hosts` from the host. **These paths have to exist on the host** or the container won't start. The `~/.claude` mount hides the image's baked `~/.claude/settings.json` (the ccusage statusline); copy its `statusLine` block into the host's settings if you want it.
+- Every base bind-mounts `~/.gitconfig`, `~/.claude`, `~/.ssh/known_hosts` and `~/.config/gh` from the host. **These paths have to exist on the host** or the container won't start, so run `gh auth login` on a new machine before opening a devcontainer. `~/.config/gh` is mounted read-write and carries the host's GitHub token, which is plaintext in `hosts.yml` on WSL. It's what makes `gh` work, and git over HTTPS too, because the host `.gitconfig` uses `gh auth git-credential` ([ADR 0002](adrs/0002-share-host-gh-config.md)). The `~/.claude` mount hides the image's baked `~/.claude/settings.json` (the ccusage statusline); copy its `statusLine` block into the host's settings if you want it.
 - Renovate updates the base configs here through the `devcontainer` manager (see `renovate.json`).
