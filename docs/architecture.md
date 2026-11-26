@@ -49,6 +49,7 @@ All images inherit these from `dockerfiles/base/Dockerfile`:
 - [helm](https://helm.sh/)
 - [tanka](https://tanka.dev/) (`tk`, `jb`)
 - [k9s](https://k9scli.io/)
+- [sofka](https://github.com/nklmilojevic/sofka)
 
 ## Consuming a base (`devcontainer_configs/`)
 

@@ -28,6 +28,14 @@ RUN K9S_URL="https://github.com/derailed/k9s/releases/download/${K9S_VERSION}/k9
     dpkg -i "${K9S_URL##*/}" && \
     rm -f "${K9S_URL##*/}"
 
+# - Install sofka (Kubernetes TUI)
+# renovate: datasource=github-releases depName=nklmilojevic/sofka
+ARG SOFKA_VERSION=v0.39.0
+RUN SOFKA_URL="https://github.com/nklmilojevic/sofka/releases/download/${SOFKA_VERSION}/sofka_${SOFKA_VERSION#v}_${TARGETARCH}.deb" && \
+    curl -O -L "$SOFKA_URL" && \
+    dpkg -i "${SOFKA_URL##*/}" && \
+    rm -f "${SOFKA_URL##*/}"
+
 # renovate: datasource=github-tags depName=aws/aws-cli
 ARG AWS_CLI_VERSION=2.34.37
 RUN ARCH=$([ "${TARGETARCH}" = "amd64" ] && echo "x86_64" || echo "aarch64") && \
