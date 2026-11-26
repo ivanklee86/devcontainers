@@ -50,7 +50,10 @@
 		"source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
 		// Mount known_hosts read-only to avoid TOFU prompts that block non-interactive git operations.
 		// Contains only public host key fingerprints — no secrets. Private keys use the forwarded agent.
-		"source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached,readonly"
+		"source=${localEnv:HOME}/.ssh/known_hosts,target=/home/vscode/.ssh/known_hosts,type=bind,consistency=cached,readonly",
+		// Mount the host gh config so gh, and git through the host .gitconfig's `gh auth git-credential`
+		// helper, use the host's GitHub login. hosts.yml holds the token in plaintext; the host directory must exist.
+		"source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached"
 	],
 
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
