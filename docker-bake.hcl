@@ -5,6 +5,7 @@ group "default" {
         "go_125",
         "go_126",
         "go_127",
+        "rust",
         "devops"
     ]
 }
@@ -90,6 +91,21 @@ target "go_127" {
     ]
     cache-from = ["type=registry,ref=${DOCKER_REPO_URL}/go:1.27-cache"]
     cache-to = ["type=registry,ref=${DOCKER_REPO_URL}/go:1.27-cache,mode=max"]
+}
+
+target "rust" {
+    contexts = {
+        base = "target:base"
+    }
+    context = "dockerfiles/rust"
+    dockerfile = "Dockerfile"
+    platforms = ["linux/amd64", "linux/arm64"]
+    tags = [
+        "${DOCKER_REPO_URL}/rust:main",
+        "${DOCKER_REPO_URL}/rust:1",
+    ]
+    cache-from = ["type=registry,ref=${DOCKER_REPO_URL}/rust:cache"]
+    cache-to = ["type=registry,ref=${DOCKER_REPO_URL}/rust:cache,mode=max"]
 }
 
 target "devops" {

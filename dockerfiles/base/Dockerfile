@@ -54,5 +54,16 @@ RUN curl -fsSL https://bun.sh/install | bash -s "bun-v${BUN_VERSION}"
 ARG CCUSAGE_VERSION=20.1.2
 RUN bun install -g ccusage@${CCUSAGE_VERSION}
 
+# Install uv and Python (Claude Code reaches for Python a lot)
+ENV UV_CACHE_DIR="/home/vscode/.uv_cache"
+ENV UV_LINK_MODE=copy
+COPY --from=ghcr.io/astral-sh/uv:0.13.10-debian /usr/local/bin/uv /usr/local/bin
+COPY --from=ghcr.io/astral-sh/uv:0.13.10-debian /usr/local/bin/uvx /usr/local/bin
+# `--default` also links `python` / `python3` into ~/.local/bin; the others get only `python3.x`.
+ARG DEFAULT_PYTHON_VERSION=3.14
+ARG EXTRA_PYTHON_VERSIONS="3.15"
+RUN uv python install ${EXTRA_PYTHON_VERSIONS} && \
+    uv python install --preview-features python-install-default --default ${DEFAULT_PYTHON_VERSION}
+
 # Enable the ccusage statusline by default
 COPY --chown=vscode:vscode claude-settings.json /home/vscode/.claude/settings.json
